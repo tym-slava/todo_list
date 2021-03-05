@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+// import Button from '../src/components/Button/index.js';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component {
+  state = 
+    {text: "",
+    count: 0,
+  }
+
+  getValue = (event) => {
+    let val = event.target.value;
+    this.setState({text: val})
+    return val;
+  }
+
+  addtask = () => {
+    let div = document.querySelector('.task-container');
+    let task = this.state.text
+    return div.innerHTML += `${task} <br/>`;
+  }
+ 
+
+  render() {
+    let oldCount = this.state.count;
+    
+
+   return (
+     <div className='App'>
+      <h1>TODO LIST</h1>
+        <input type='text' placeholder='Enter some task...' className='inp' onChange={this.getValue}/>
+        <button className='btn' onClick={this.addtask}>SAVE</button>
+        <div className="task-container">
+          <p>{`${oldCount} tasks`}</p>
+          
+        </div>
+
+     </div>
+   )
+  } 
 }
 
 export default App;
